@@ -27,8 +27,17 @@ file(GLOB_RECURSE DIR_SRCS    ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 file(GLOB_RECURSE DIR_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
 file(GLOB_RECURSE DIR_UIS     ${CMAKE_CURRENT_SOURCE_DIR}/*.ui)
 set(PROJECT_SOURCES
+        PointProcress.cpp
+        PointProcress.H
         camconcrol.cpp
         camconcrol.h
+        removewin.cpp
+        removewin.h
+        removewin.ui
+        PointROIWin.cpp
+        PointROIWin.h
+        PointROIWin.ui
+        
 
         )
 # add resource

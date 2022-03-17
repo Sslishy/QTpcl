@@ -4,9 +4,14 @@ CloudViewer::CloudViewer(QWidget *parent)
 	: QMainWindow(parent) {
 	ui.setupUi(this);
 	/***** Slots connection of QMenuBar and QToolBar *****/
-    // opencamera
-    QObject::connect(ui.OpenButton,SIGNAL(clicked()),this,SLOT(colorBtnPressed()));
+    // camera
+    QObject::connect(ui.OpenButton,SIGNAL(clicked()),this,SLOT(OpenBtnPressed()));
 
+    //pointcloud process
+    QObject::connect(ui.RemovePointCloudAction,&QAction::triggered,this,&CloudViewer::remove);
+    QObject::connect(ui.actionPointCloudROI,&QAction::triggered,this,&CloudViewer::pointroiwinshow);
+    QObject::connect(&removepoint,&RemoveWin::removesignal,this,&CloudViewer::dealremovesignal);
+    QObject::connect(&pointroi,&PointROIWin::pointroisignal,this,&CloudViewer::dealroisignal);
     // File (connect)
 
 
@@ -1082,4 +1087,59 @@ int CloudViewer::convertWireframe() {
 
 void CloudViewer::debug(const string& s) {
 	QMessageBox::information(this, tr("Debug"), QString::fromLocal8Bit(s.c_str()));
+}
+
+// Open camera click
+void CloudViewer::OpenBtnPressed()
+{
+
+}
+void CloudViewer::remove()
+{
+    removepoint.setModal(true);
+    removepoint.show();
+}
+void CloudViewer::dealremovesignal()
+{   timeStart();
+    mycloud_vec.clear();
+    total_points = 0;
+    viewer->removeAllPointClouds();
+	removepoint.Removepointcloud(mycloud);
+    mycloud.viewer = viewer;
+    mycloud_vec.push_back(mycloud);
+    timeCostSecond = timeOff(); // time off
+    consoleLog(
+        "Remove Point Cloud",
+        toQString(mycloud.fileName),
+        toQString(mycloud.filePath),
+        "Time cost: " + timeCostSecond + " s, Points: " + QString::number(mycloud.cloud->points.size())
+    );
+    total_points = mycloud.cloud->points.size();
+    showPointcloudAdd();
+    setPropertyTable();
+}
+void CloudViewer::pointroiwinshow()
+{
+    pointroi.setModal(true);
+    pointroi.show();
+}
+void CloudViewer::dealroisignal()
+{
+        timeStart();
+        mycloud_vec.clear();
+        total_points = 0;
+        viewer->removeAllPointClouds();
+        pointroi.setroi(mycloud);
+        mycloud.viewer = viewer;
+        mycloud_vec.push_back(mycloud);
+        timeCostSecond = timeOff(); // time off
+        consoleLog(
+            "Set Point Cloud ROI",
+            toQString(mycloud.fileName),
+            toQString(mycloud.filePath),
+            "Time cost: " + timeCostSecond + " s, Points: " + QString::number(mycloud.cloud->points.size())
+        );
+        total_points = mycloud.cloud->points.size();
+        showPointcloudAdd();
+        setPropertyTable();
 }

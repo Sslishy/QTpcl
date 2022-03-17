@@ -176,6 +176,11 @@
     </property>
     <addaction name="meshsurfaceAction"/>
     <addaction name="wireframeAction"/>
+    <addaction name="RemovePointCloudAction"/>
+    <addaction name="actionPointCloudROI"/>
+    <addaction name="actionDownSimple"/>
+    <addaction name="actionExtractionBoundary"/>
+    <addaction name="actionFittingMode"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -558,6 +563,17 @@
      </item>
      <item>
       <widget class="QPushButton" name="OpenButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>aakar</family>
+        </font>
+       </property>
        <property name="text">
         <string>OpenCamera</string>
        </property>
@@ -1153,6 +1169,31 @@
   <action name="actionRotate90">
    <property name="text">
     <string>Rotate90</string>
+   </property>
+  </action>
+  <action name="RemovePointCloudAction">
+   <property name="text">
+    <string>RemovePointCloud</string>
+   </property>
+  </action>
+  <action name="actionPointCloudROI">
+   <property name="text">
+    <string>PointCloudROI</string>
+   </property>
+  </action>
+  <action name="actionDownSimple">
+   <property name="text">
+    <string>DownSimple</string>
+   </property>
+  </action>
+  <action name="actionExtractionBoundary">
+   <property name="text">
+    <string>ExtractionBoundary</string>
+   </property>
+  </action>
+  <action name="actionFittingMode">
+   <property name="text">
+    <string>FittingMode</string>
    </property>
   </action>
  </widget>

@@ -26,7 +26,8 @@
 #include "Tools.h"
 #include "MeshProcessing.h"
 #include "FileIO.h"
-
+#include"removewin.h"
+#include"pointroiwin.h"
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -80,12 +81,13 @@ public:
 
 private:
 	Ui::CloudViewerClass ui;
-
+    RemoveWin removepoint;
+    PointROIWin pointroi;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr xyzCloud;
 	MyCloud mycloud;
 	std::vector<MyCloud> mycloud_vec;
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
-
+	
 	FileIO fileIO;
 
 	QString save_filename;
@@ -129,6 +131,7 @@ private:
 
 	// About menu slots
 	void about();
+
 	void help();
 
 	/***** Utils Methods ***/
@@ -142,12 +145,20 @@ private:
 	void setConsoleTable();
 
 	void consoleLog(QString operation, QString subname, QString filename, QString note);
+    // new add
+    void remove();
+    void pointroiwinshow();
+
+
 
 public slots:
+    void dealroisignal();
+	void dealremovesignal();
 	void save();
 	void changeTheme();
 	void changeLanguage();
 	void colorBtnPressed();
+    void OpenBtnPressed();
 	void RGBsliderReleased();
 	void psliderReleased();
 	void pSliderChanged(int value);
