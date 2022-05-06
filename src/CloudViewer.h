@@ -28,6 +28,7 @@
 #include "FileIO.h"
 #include"removewin.h"
 #include"pointroiwin.h"
+#include"downsimplewin.h"
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -83,13 +84,12 @@ private:
 	Ui::CloudViewerClass ui;
     RemoveWin removepoint;
     PointROIWin pointroi;
+    DownSimpleWin downsimple;
 	pcl::PointCloud<pcl::PointXYZ>::Ptr xyzCloud;
 	MyCloud mycloud;
 	std::vector<MyCloud> mycloud_vec;
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
-	
 	FileIO fileIO;
-
 	QString save_filename;
 	long total_points = 0; //Total amount of points in the viewer
 
@@ -131,16 +131,13 @@ private:
 
 	// About menu slots
 	void about();
-
 	void help();
 
 	/***** Utils Methods ***/
 	void initial();
 	void showPointcloud();  //显示点云
 	void showPointcloudAdd();  //添加给viewer，显示点云
-
 	void setCloudColor(unsigned int r, unsigned int g, unsigned int b);
-
 	void setPropertyTable();
 	void setConsoleTable();
 
@@ -148,12 +145,13 @@ private:
     // new add
     void remove();
     void pointroiwinshow();
-
+    void downsimplewinshow();
 
 
 public slots:
     void dealroisignal();
 	void dealremovesignal();
+    void dealdownsimplesignal();
 	void save();
 	void changeTheme();
 	void changeLanguage();

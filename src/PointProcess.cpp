@@ -19,6 +19,14 @@ void PointProcess::DownSimple(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_in)
     sor.setLeafSize(Size,Size,Size);
     sor.filter(*cloud_in);
 }
+void PointProcess::DownSimple(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud_in)
+{
+    float Size = m_LeafSize;
+    pcl::VoxelGrid<pcl::PointXYZRGBA> sor;
+    sor.setInputCloud(cloud_in);
+    sor.setLeafSize(Size,Size,Size);
+    sor.filter(*cloud_in);
+}
 
  void PointProcess::DownSimple(vector<pcl::PointCloud<pcl::PointXYZ>> &cloudlist)
  {

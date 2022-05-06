@@ -48,6 +48,7 @@ public:
     }
 
     void DownSimple(pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud_in);
+    void DownSimple(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr &cloud_in);
     void DownSimple(vector<pcl::PointCloud<pcl::PointXYZ>> &cloudlist);
     void Removepoint(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in);
     void Removepoint(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud_in);

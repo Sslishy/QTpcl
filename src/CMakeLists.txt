@@ -37,7 +37,12 @@ set(PROJECT_SOURCES
         PointROIWin.cpp
         PointROIWin.h
         PointROIWin.ui
-        
+        DownSimpleWin.cpp
+        DownSimpleWin.h
+        DownSimpleWin.ui
+        ExtractionBoundaryWin.cpp
+        ExtractionBoundaryWin.h
+        ExtractionBoundaryWin.ui
 
         )
 # add resource

@@ -10,8 +10,10 @@ CloudViewer::CloudViewer(QWidget *parent)
     //pointcloud process
     QObject::connect(ui.RemovePointCloudAction,&QAction::triggered,this,&CloudViewer::remove);
     QObject::connect(ui.actionPointCloudROI,&QAction::triggered,this,&CloudViewer::pointroiwinshow);
+     QObject::connect(ui.actionDownSimple,&QAction::triggered,this,&CloudViewer::downsimplewinshow);
     QObject::connect(&removepoint,&RemoveWin::removesignal,this,&CloudViewer::dealremovesignal);
     QObject::connect(&pointroi,&PointROIWin::pointroisignal,this,&CloudViewer::dealroisignal);
+    QObject::connect(&downsimple,&DownSimpleWin::downsimplesignal,this,&CloudViewer::dealdownsimplesignal);
     // File (connect)
 
 
@@ -1142,4 +1144,30 @@ void CloudViewer::dealroisignal()
         total_points = mycloud.cloud->points.size();
         showPointcloudAdd();
         setPropertyTable();
+}
+void CloudViewer::downsimplewinshow()
+{
+    downsimple.setModal(true);
+    downsimple.show();
+}
+void CloudViewer::dealdownsimplesignal()
+{
+    timeStart();
+    mycloud_vec.clear();
+    total_points = 0;
+    viewer->removeAllPointClouds();
+    downsimple.DownSimple(mycloud);
+    mycloud.viewer = viewer;
+    mycloud_vec.push_back(mycloud);
+    timeCostSecond = timeOff(); // time off
+    consoleLog(
+        "Point Cloud DownSimple",
+        toQString(mycloud.fileName),
+        toQString(mycloud.filePath),
+        "Time cost: " + timeCostSecond + " s, Points: " + QString::number(mycloud.cloud->points.size())
+    );
+    total_points = mycloud.cloud->points.size();
+    showPointcloudAdd();
+    setPropertyTable();
+
 }

@@ -1,0 +1,29 @@
+#ifndef EXTRACTIONBOUNDARYWIN_H
+#define EXTRACTIONBOUNDARYWIN_H
+
+#include <QDialog>
+#include"MyCloud.h"
+namespace Ui {
+class ExtractionBoundaryWin;
+}
+
+class ExtractionBoundaryWin : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit ExtractionBoundaryWin(QWidget *parent = nullptr);
+    ~ExtractionBoundaryWin();
+public slots:
+    void sendslot();
+    void OKButtonPressed();
+    MyCloud ExtractionBoundary(MyCloud &mycloud);
+private:
+    Ui::ExtractionBoundaryWin *ui;
+    int m_K  = 0; 
+    float m_RadiusSearch = 0;
+signals:
+    void ExtractionBoundarySignal();
+};
+
+#endif // EXTRACTIONBOUNDARYWIN_H
